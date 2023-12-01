@@ -1,0 +1,53 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    slug:
+        label: Slug
+        type: text
+        required: true
+        span: left
+    title:
+        label: Title
+        type: text
+        required: true
+        span: right
+    cover_photo:
+        label: Cover Photo
+        type: fileupload
+        span: left
+    country:
+        label: Country
+        type: dropdown
+        span: right
+    category:
+        label: Category
+        type: dropdown
+        required: true
+        span: left
+    cluster:
+        label: Cluster
+        type: dropdown
+        required: true
+        span: right
+    scientific_partners:
+        label: Scientific Partner
+        type: checkboxlist
+        span: left
+    policy_partners:
+        label: Policy Partner
+        type: checkboxlist
+        span: right
+    main_objective:
+        label: Main Objective
+        type: richeditor
+        span: left
+    expected_outcome:
+        label: Expected Outcome
+        type: richeditor
+        span: right
+    content:
+        label: Content
+        type: richeditor
+        span: full

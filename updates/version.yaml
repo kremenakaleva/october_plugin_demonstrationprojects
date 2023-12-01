@@ -1,0 +1,10 @@
+1.0.1: First version of DemonstrationProjects
+1.0.2: 
+  - 'Created create_demonstration_projects_table'
+  - create_demonstration_projects_table.php
+1.0.3:
+  - 'Created pivot table for scientific partners'
+  - create_scientific_partners_demonstrations_table.php
+1.0.4:
+  - 'Created pivot table for policy partners'
+  - create_policy_partners_demonstrations_table.php

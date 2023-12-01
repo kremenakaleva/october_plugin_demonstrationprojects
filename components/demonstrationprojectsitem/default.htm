@@ -1,0 +1,56 @@
+{% if records %}
+<div class="container">
+    <!-- Header -->
+    <div class="col-xs-12 dp-head">
+        <h1>{{records.slug}}: {{records.title}}</h1>
+    </div>
+
+    <!-- Cover and intro -->
+    <div class="row">
+        <div class="col-md-4 col-xs-12">
+            <img src="{{ records.cover_photo.path }}" class="card-img" alt="{{ record.title }}">
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div class="row"><h3 class="dp-title">Main objective: </h3>{{records.main_objective | raw}}</div>
+            <div class="row"><h3 class="dp-title">Expected outcome(s): </h3>{{records.expected_outcome | raw}}</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-xs-12">
+        <div class="row">{{records.content | raw}}</div>   
+    </div>
+
+    <!-- Partners -->
+    <div class="container dp-partners">
+        <div class="row">
+            <!-- Scientific Partners -->
+            {% if records.scientific_partners.count > 0 %}
+            <h3 class="dp-title">Scientific Partner:</h3>
+            {% for partner in records.scientific_partners %}
+                <div class="col-md-2 col-xs-12 partner-col">
+                    <a href="{{ partner.instituion_url }}" target="_blank">
+                        <img src="{{ partner.cover.path }}" alt="Partner Cover" class="img-responsive partner-img">
+                    </a>
+                </div>
+            {% endfor %}
+            {% endif %}
+            <!-- Policy Partners -->
+            {% if records.policy_partners.count > 0 %}
+            <h3 class="dp-title">Policy Partner:</h3>
+            {% for partner in records.policy_partners %}
+                <div class="col-md-2 col-xs-12 partner-col">
+                    <a href="{{ partner.instituion_url }}" target="_blank">
+                        <img src="{{ partner.cover.path }}" alt="Partner Cover" class="img-responsive partner-img">
+                    </a>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>    
+
+</div>
+<!-- If no records -->
+{% else %}
+    <p>No record found with this slug.</p>
+{% endif %}

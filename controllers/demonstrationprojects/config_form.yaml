@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Demonstration Project
+
+# Model Form Field configuration
+form: $/pensoft/demonstrationprojects/models/demonstrationprojects/fields.yaml
+
+# Model Class name
+modelClass: Pensoft\DemonstrationProjects\Models\DemonstrationProjects
+
+# Default redirect location
+defaultRedirect: pensoft/demonstrationprojects/demonstrationprojects
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: pensoft/demonstrationprojects/demonstrationprojects/update/:id
+    redirectClose: pensoft/demonstrationprojects/demonstrationprojects
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: pensoft/demonstrationprojects/demonstrationprojects
+    redirectClose: pensoft/demonstrationprojects/demonstrationprojects
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title
