@@ -1,0 +1,24 @@
+{% if records %}
+<div class="container">
+    {% for record in records %}
+    <div class="col-xs-12">
+        <div class="dp-card row">
+            <div class="col-md-3 col-xs-12 dp-card-img">
+                <img src="{{ record.cover_photo.path }}" class="card-img" alt="{{ record.title }}">
+            </div>
+            <div class="col-md-7 col-xs-12 dp-card-body">
+                <div class="card-title"><span class="dp-slug">{{ record.slug }}: </span> {{ record.title }}</div>
+                <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more">Read more</a>
+            </div>
+            <div class="col-md-2 col-xs-12 dp-card-country">
+                <div class="card-country">{{ record.country }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- If no records -->
+{% else %}
+<h3>No records to display.</h3>
+{% endif %}

@@ -1,43 +1,48 @@
 <!-- Filter -->
-<div class="record-filters">
-    <form method="get">
-        <div class="filter">
-            <select name="category" onchange="this.form.submit()">
-                <option value="">All categories</option>
-                {% for key, name in categories %}
-                <option value="{{ key }}" {{ category == key ? 'selected' : '' }}>{{ name }}</option>
-                {% endfor %}
-            </select>
-    
-            <select name="cluster" onchange="this.form.submit()">
-                <option value="">All demonstration projects</option>
-                {% for key, name in clusters %}
-                <option value="{{ key }}" {{ cluster == key ? 'selected' : '' }}>{{ name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </form>
+<div class="container">
+    <div class="record-filters">
+        {{ form_ajax('onFilterRecords', { update: { 'demonstrationprojectslist::records': '#recordsContainer' } }) }}
+            <div class="filter">
+                <select name="category" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
+                    <option value="">All categories</option>
+                    {% for key, name in categories %}
+                        <option value="{{ key }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+        
+                <select name="cluster" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
+                    <option value="">All demonstration projects</option>
+                    {% for key, name in clusters %}
+                        <option value="{{ key }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {{ form_close() }}
+    </div>
 </div>
 
+
+
 {% if records %}
-<div class="container">
+<div class="container" id="recordsContainer">
     {% for record in records %}
     <div class="col-xs-12">
         <div class="dp-card row">
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-12 dp-card-img">
                 <img src="{{ record.cover_photo.path }}" class="card-img" alt="{{ record.title }}">
             </div>
-            <div class="col-md-7 dp-card-body">
+            <div class="col-md-7 col-xs-12 dp-card-body">
                 <div class="card-title"><span class="dp-slug">{{ record.slug }}: </span> {{ record.title }}</div>
                 <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more">Read more</a>
             </div>
-            <div class="col-md-2 dp-card-country">
+            <div class="col-md-2 col-xs-12 dp-card-country">
                 <div class="card-country">{{ record.country }}</div>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+
 <!-- If no records -->
 {% else %}
 <h3>No records to display.</h3>

@@ -8,3 +8,4 @@
 1.0.4:
   - 'Created pivot table for policy partners'
   - create_policy_partners_demonstrations_table.php
+1.0.5: 'FIX'

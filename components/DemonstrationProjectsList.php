@@ -38,7 +38,14 @@ class DemonstrationProjectsList extends ComponentBase
         return $demoModelInstance->getClusterOptions();
     }
     
-
+    public function onFilterRecords()
+    {
+        $this->page['records'] = $this->filterRecords();
+        return [
+            '#recordsContainer' => $this->renderPartial('@records', ['records' => $this->page['records']])
+        ];
+    }
+    
     protected function filterRecords()
     {
         $category = \Input::get('category');
