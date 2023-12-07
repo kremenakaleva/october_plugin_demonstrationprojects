@@ -9,3 +9,6 @@
   - 'Created pivot table for policy partners'
   - create_policy_partners_demonstrations_table.php
 1.0.5: 'FIX'
+1.0.6:
+  - 'updated demonstration_projects_table and added reorder'
+  - update_demonstration_projects_table.php

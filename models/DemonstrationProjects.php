@@ -1,6 +1,7 @@
 <?php namespace Pensoft\DemonstrationProjects\Models;
 
 use Model;
+use October\Rain\Database\Traits\Sortable;
 
 /**
  * DemonstrationProjects Model
@@ -8,6 +9,7 @@ use Model;
 class DemonstrationProjects extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use Sortable;
 
     /**
      * @var string table associated with the model
@@ -32,7 +34,9 @@ class DemonstrationProjects extends Model
     /**
      * @var array Attributes to be cast to native types
      */
-    protected $casts = [];
+    protected $casts = [
+        
+    ];
 
     /**
      * @var array jsonable attribute names that are json encoded and decoded from the database

@@ -64,7 +64,7 @@ class DemonstrationProjectsList extends ComponentBase
             $query->where('cluster', $cluster);
         }
 
-        return $query->orderBy('title', 'asc')->get();
+        return $query->orderBy('sort_order')->get();
     }
 
     public function defineProperties()

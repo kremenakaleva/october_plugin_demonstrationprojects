@@ -12,4 +12,4 @@ orderColumn: sort_order
 title: Reorder Demonstrations Projects
 
 # The attribute on the model to use for the display name
-nameFrom: title
+nameFrom: slug
