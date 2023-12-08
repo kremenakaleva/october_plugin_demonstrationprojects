@@ -81,6 +81,12 @@ class DemonstrationProjects extends Model
             'key' => 'demonstration_id',
             'otherKey' => 'partner_id'
         ],
+        'business_partners' => [
+            'Pensoft\Partners\Models\Partners',
+            'table' => 'pensoft_business_partners_demonstrations',
+            'key' => 'demonstration_id',
+            'otherKey' => 'partner_id'
+        ],
     ];
     public $morphTo = [];
     public $morphOne = [];
@@ -108,10 +114,20 @@ class DemonstrationProjects extends Model
         return \Pensoft\Partners\Models\Partners::pluck('instituion', 'id')->toArray();
     }
 
+    public function getBusinessPartnersOptions()
+    {
+        return \Pensoft\Partners\Models\Partners::pluck('instituion', 'id')->toArray();
+    }
+
     public function getCountryOptions()
     {
-        return \RainLab\Location\Models\Country::orderBy('name', 'asc')->pluck('name', 'name')->toArray();
+        $countries = \RainLab\Location\Models\Country::orderBy('name', 'asc')->pluck('name', 'name')->toArray();
+        
+        $eu = ['Europe' => 'Europe'];
+
+        return $countries + $eu;
     }
+    
 
     public function getClusterOptions()
     {

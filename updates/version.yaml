@@ -12,3 +12,6 @@
 1.0.6:
   - 'updated demonstration_projects_table and added reorder'
   - update_demonstration_projects_table.php
+1.0.7:
+  - 'Created pivot table for business partners, added Europe'
+  - create_business_partners_demonstrations_table.php

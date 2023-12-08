@@ -39,14 +39,18 @@ fields:
         label: Policy Partner
         type: checkboxlist
         span: right
+    business_partners:
+        label: Business Partner
+        type: checkboxlist
+        span: left
     main_objective:
         label: Main Objective
         type: richeditor
-        span: left
+        span: full
     expected_outcome:
         label: Expected Outcome
         type: richeditor
-        span: right
+        span: full
     content:
         label: Content
         type: richeditor

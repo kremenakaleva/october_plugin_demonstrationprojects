@@ -22,36 +22,55 @@
     </div>
 
 <!-- Partners -->
-<div class="container dp-partners">
+<div class="dp-partners">
     <div class="row align-items-center db-row">
 
         <!-- Scientific Partners -->
-        {% if records.scientific_partners.count > 0 %}
-        <div class="col-sm-6 col-xs-12 d-flex flex-md-row flex-column align-items-center">
+        <div class="col-sm-4 col-xs-12 d-flex flex-md-row flex-column align-items-center">
             <span class="dp-title">Scientific Partner:</span>
-            {% for partner in records.scientific_partners %}
-            <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
-                <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
-            </a>
-            {% endfor %}
+            {% if records.scientific_partners.count == 0 %}
+                <div> None</div>
+            {% elseif records.scientific_partners.count == 1 %}
+                {% set partner = records.scientific_partners.first() %}
+                <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
+                    <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
+                </a>
+            {% else %}
+                <div> Various</div>
+            {% endif %}
         </div>
-        {% endif %}
 
         <!-- Policy Partners -->
-        {% if records.policy_partners.count > 0 %}
-        <div class="col-sm-6 col-xs-12 d-flex align-items-center flex-md-row flex-column">
+        <div class="col-sm-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
             <span class="dp-title">Policy Partner:</span>
-            {% for partner in records.policy_partners %}
-            <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
-                <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
-            </a>
-            {% endfor %}
+            {% if records.policy_partners.count == 0 %}
+                <div> None</div>
+            {% elseif records.policy_partners.count == 1 %}
+                {% set partner = records.policy_partners.first() %}
+                <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
+                    <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
+                </a>
+            {% else %}
+                <div> Various</div>
+            {% endif %}
         </div>
-        {% endif %}
 
+        <!-- Business Partners -->
+        <div class="col-sm-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
+            <span class="dp-title">Business Partner:</span>
+            {% if records.business_partners.count == 0 %}
+                <div> None</div>
+            {% elseif records.business_partners.count == 1 %}
+                {% set partner = records.business_partners.first() %}
+                <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
+                    <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
+                </a>
+            {% else %}
+                <div> Various</div>
+            {% endif %}
+        </div>
     </div>
 </div>
-
 
 </div>
 <!-- If no records -->
