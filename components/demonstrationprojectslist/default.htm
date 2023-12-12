@@ -11,7 +11,7 @@
                     </select>
             
                     <select name="cluster" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
-                        <option value="">All demonstration projects</option>
+                        <option value="">All clusters</option>
                         {% for key, name in clusters %}
                             <option value="{{ key }}">{{ name }}</option>
                         {% endfor %}
