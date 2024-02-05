@@ -1,14 +1,23 @@
 {% if records %}
-<div class="dp-records">
+<div class="dp-records" id="recordsContainer">
     {% for record in records %}
     <div class="col-xs-12">
         <div class="dp-card row">
             <div class="col-md-3 col-xs-12 dp-card-img">
-                <img src="{{ record.cover_photo.path }}" class="card-img" alt="{{ record.title }}">
+                <img src="{{ record.cover_photo.thumb(300, 207, {'mode': 'crop'}) }}" class="card-img" alt="{{ record.title }}">
             </div>
             <div class="col-md-7 col-xs-12 dp-card-body">
                 <div class="card-title"><span class="dp-slug">{{ record.slug }}: </span> {{ record.title }}</div>
-                <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more">Read more</a>
+                <div class="row dp-links">
+                    <div class="col-md-6 col-xs-12">
+                        <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more">Read more</a>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        {% if record.embedded_url %}
+                        <a href="{{record.embedded_url}}" class="read-more">Watch video</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             <div class="col-md-2 col-xs-12 dp-card-country">
                 <div class="card-country">{{ record.country }}</div>
@@ -22,3 +31,5 @@
 {% else %}
 <h3>No records to display.</h3>
 {% endif %}
+
+</div>

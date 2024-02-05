@@ -55,3 +55,7 @@ fields:
         label: Content
         type: richeditor
         span: full
+    embedded_url:
+        label: Embedded video URL
+        type: text
+        span: auto

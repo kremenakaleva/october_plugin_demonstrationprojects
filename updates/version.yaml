@@ -17,3 +17,6 @@
   - create_business_partners_demonstrations_table.php
 1.0.8:
   - 'Fix'
+1.0.9:
+  - 'updated demonstration_projects_table and added embeded url'
+  - update_demonstration_projects_table_2.php

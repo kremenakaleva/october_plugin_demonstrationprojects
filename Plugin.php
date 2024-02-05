@@ -2,6 +2,7 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use Twig\TwigFilter;
 
 /**
  * DemonstrationProjects Plugin Information File
@@ -40,8 +41,17 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-
+        // Register custom filter for converting embedded videos
+        \Event::listen('cms.page.beforeDisplay', function($controller, $url, $page) {
+            $twig = $controller->getTwig();
+            $twig->addFilter(new \Twig\TwigFilter('youtube_embed', function ($url) {
+                preg_match('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w\-]+)/', $url, $matches);
+                $videoId = $matches[1] ?? null;
+                return $videoId ? "https://www.youtube.com/embed/$videoId" : null;
+            }));
+        });
     }
+    
 
     /**
      * Registers any front-end components implemented in this plugin.
