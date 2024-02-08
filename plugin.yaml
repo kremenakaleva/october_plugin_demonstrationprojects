@@ -1,0 +1,11 @@
+plugin:
+    name: 'pensoft.demonstrationprojects::lang.plugin.name'
+    description: 'pensoft.demonstrationprojects::lang.plugin.description'
+    author: Pensoft
+    icon: oc-icon-calendar-o
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'Demo projects'
+        url: pensoft/demonstrationprojects/demonstrationprojects
+        icon: icon-flask
