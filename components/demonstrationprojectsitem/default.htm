@@ -15,17 +15,19 @@
             <div><span class="dp-title">Expected outcome(s): </span> {{ records.expected_outcome | raw }}</div>
         </div>
     </div>
-    <!-- Main Content -->
-    <div class="col-xs-12 dp-content">
-        <div class="row">{{records.content | raw}}</div>   
-    </div>
 
-    <!-- Embedded video -->
-    {% if records.embedded_url %}
-    <div class="dp-video">
-        <iframe src="{{ records.embedded_url|youtube_embed }}" title="YouTube video player" frameborder="0" allowfullscreen=""></iframe>
+    <!-- Main Content -->
+    <div class="row dp-content-row">
+        {% if records.embedded_url %}
+        <div class="col-md-4 col-xs-12 dp-video">
+            <iframe src="{{ records.embedded_url|youtube_embed }}" title="YouTube video player" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+        {% endif %}
+        <div class="col-md-8 col-xs-12 dp-content">
+            <!-- CONTENT -->
+            <div class="row">{{records.content | raw}}</div>    
+        </div>
     </div>
-    {% endif %}
 
     <!-- Partners -->
     <div class="container dp-partners">

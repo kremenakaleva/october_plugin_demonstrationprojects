@@ -3,19 +3,22 @@
         <div class="record-filters">
             {{ form_ajax('onFilterRecords', { update: { 'demonstrationprojectslist::records': '#recordsContainer' } }) }}
                 <div class="filter">
-                    <select name="category" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
-                        <option value="">All categories</option>
-                        {% for key, name in categories %}
-                            <option value="{{ key }}">{{ name }}</option>
-                        {% endfor %}
-                    </select>
-            
-                    <select name="cluster" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
-                        <option value="">All clusters</option>
-                        {% for key, name in clusters %}
-                            <option value="{{ key }}">{{ name }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="select-wrapper">
+                        <select name="category" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
+                            <option value="">All categories</option>
+                            {% for key, name in categories %}
+                                <option value="{{ key }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <select name="cluster" data-request="onFilterRecords" data-request-update="'@records': '#recordsContainer'">
+                            <option value="">All clusters</option>
+                            {% for key, name in clusters %}
+                                <option value="{{ key }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             {{ form_close() }}
         </div>
@@ -36,7 +39,7 @@
                         </div>
                         <div class="col-md-6 col-xs-12">
                             {% if record.embedded_url %}
-                            <a href="{{record.embedded_url}}" target="_blank" class="read-more">Watch video</a>
+                            <a href="javascript:void(0);" onclick="showVideoPopup('{{ record.embedded_url|youtube_embed }}')" class="read-more watch-video">Watch video</a>
                             {% endif %}
                         </div>
                     </div>
@@ -53,5 +56,16 @@
     {% else %}
         <h3>No records to display.</h3>
     {% endif %}
+</div>
 
+<!-- Video Popup Modal -->
+<div id="videoPopupModal" class="video-popup-modal" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-modal" onclick="closeVideoPopup()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
 </div>
