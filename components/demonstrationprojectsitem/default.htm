@@ -35,13 +35,13 @@
 
             <!-- Scientific Partners -->
             {% if records.scientific_partners %}
-            <div class="col-sm-4 col-xs-12 d-flex flex-md-row flex-column align-items-center">
+            <div class="col-md-4 col-xs-12 d-flex flex-md-row flex-column align-items-center">
                 <span class="dp-title">Scientific Partner:</span>
                 {% if records.scientific_partners.count == 1 %}
                     {% set partner = records.scientific_partners.first() %}
                     <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
                         {% if partner.cover %}
-                        <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
+                        <img src="{{ partner.cover.thumb(176, auto, {mode: 'crop'})}}" alt="Partner Cover" class="partner-img img-fluid">
                         {% else %}
                         <div>{{ partner.instituion }}</div>
                         {% endif %}
@@ -54,13 +54,13 @@
 
             <!-- Policy Partners -->
             {% if records.policy_partners %}
-            <div class="col-sm-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
+            <div class="col-md-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
                 <span class="dp-title">Policy Partner:</span>
                 {% if records.policy_partners.count == 1 %}
                     {% set partner = records.policy_partners.first() %}
                     <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
                         {% if partner.cover %}
-                        <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
+                        <img src="{{ partner.cover.thumb(176, auto, {mode: 'crop'})}}" alt="Partner Cover" class="partner-img img-fluid">
                         {% else %}
                         <div>{{ partner.instituion }}</div>
                         {% endif %}
@@ -73,13 +73,13 @@
 
             <!-- Business Partners -->
             {% if records.business_partners %}
-            <div class="col-sm-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
+            <div class="col-md-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
                 <span class="dp-title">Business Partner:</span>
                 {% if records.business_partners.count == 1 %}
                     {% set partner = records.business_partners.first() %}
                     <a href="{{ partner.cover }}" target="_blank" class="ms-2">
                         {% if partner.cover %}
-                        <img src="{{ partner.cover.path }}" alt="Partner Cover" class="partner-img img-fluid">
+                        <img src="{{ partner.cover.thumb(176, auto, {mode: 'crop'})}}" alt="Partner Cover" class="partner-img img-fluid">
                         {% else %}
                         <div>{{ partner.instituion }}</div>
                         {% endif %}

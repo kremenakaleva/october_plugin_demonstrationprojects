@@ -101,6 +101,17 @@ class DemonstrationProjects extends Model
         return [
             'Public' => 'Public',
             'Private' => 'Private',
+            'Hybrid' => 'Hybrid'
+        ];
+    }
+
+    public function getClusterOptions()
+    {
+        return [
+            'Agriculture and water' => 'Agriculture and water',
+            'Forestry and Finance' => 'Forestry and Finance',
+            'Coastal and marine' => 'Coastal and marine',
+            'Spatial planning' => 'Spatial planning',
         ];
     }
 
@@ -164,16 +175,6 @@ class DemonstrationProjects extends Model
                 $this->embedded_url = $embed_url;
             }
         }
-    }
-
-    public function getClusterOptions()
-    {
-        return [
-            'Agriculture and water' => 'Agriculture and water',
-            'Forestry and Finance' => 'Forestry and Finance',
-            'Coastal and marine' => 'Coastal and marine',
-            'Spatial planning' => 'Spatial planning',
-        ];
     }
 
 }

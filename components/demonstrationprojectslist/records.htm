@@ -4,10 +4,12 @@
     <div class="col-xs-12">
         <div class="dp-card row">
             <div class="col-md-3 col-xs-12 dp-card-img">
-                <img src="{{ record.cover_photo.thumb(300, 207, {'mode': 'crop'}) }}" class="card-img" alt="{{ record.title }}">
+                <a href="{{ 'dp'|page({ slug: record.slug }) }}">
+                    <img src="{{ record.cover_photo.thumb(300, 207, {'mode': 'crop'}) }}" class="card-img" alt="{{ record.title }}">
+                </a>
             </div>
             <div class="col-md-7 col-xs-12 dp-card-body">
-                <div class="card-title"><span class="dp-slug">{{ record.slug }}: </span> {{ record.title }}</div>
+                <div class="card-title"><span class="dp-slug">{{ record.slug }}: </span> <a href="{{ 'dp'|page({ slug: record.slug }) }}">{{ record.title }}</a></div>
                 <div class="row dp-links">
                     <div class="col-md-6 col-xs-12">
                         <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more">Read more</a>
@@ -29,7 +31,6 @@
 
 <!-- If no records -->
 {% else %}
-<h3>No records to display.</h3>
+    <h3>No records to display.</h3>
 {% endif %}
-
 </div>
