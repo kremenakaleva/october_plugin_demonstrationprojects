@@ -3,23 +3,47 @@
 # ===================================
 
 fields:
+    title:
+        label: Title
+        type: text
+        required: true
+        span: full
     slug:
         label: Slug
         type: text
         required: true
         span: left
-    title:
-        label: Title
-        type: text
-        required: true
-        span: right
-    cover_photo:
-        label: Cover Photo
-        type: fileupload
-        span: left
     country:
         label: Country
         type: dropdown
+        span: right
+    icon_settings:
+        label: Icon Settings
+        span: full
+        type: checkboxlist
+        options:
+            dp-grasslands: Grasslands
+            dp-marine: Marine
+            dp-urban: Urban
+            dp-wetlands: Wetlands
+            dp-agriculture: Agriculture
+            dp-forests: Forests
+            dp-riverslakes: Rivers & Lakes
+    cover_photo:
+        label: Cover Photo (Left)
+        type: fileupload
+        span: left
+    right_photo:
+        label: Right Photo
+        type: fileupload
+        span: right
+    center_photo:
+        label: Center Photo
+        type: fileupload
+        span: left
+    embedded_url:
+        label: Video
+        type: text
         span: right
     category:
         label: Category
@@ -30,6 +54,27 @@ fields:
         label: Cluster
         type: dropdown
         required: true
+        span: right
+    main_objective:
+        label: Main Objective
+        type: richeditor
+        span: full
+    expected_outcome:
+        label: Expected Outcome
+        type: richeditor
+        span: full
+    content:
+        label: Content
+        type: richeditor
+        span: full
+    pdf_preview:
+        label: Pdf Preview
+        type: fileupload
+        span: left
+    pdf_document:
+        label: Pdf Document
+        type: fileupload
+        mode: file
         span: right
     scientific_partners:
         label: Scientific Partner
@@ -43,19 +88,3 @@ fields:
         label: Business Partner
         type: checkboxlist
         span: left
-    main_objective:
-        label: Main Objective
-        type: richeditor
-        span: full
-    expected_outcome:
-        label: Expected Outcome
-        type: richeditor
-        span: full
-    content:
-        label: Content
-        type: richeditor
-        span: full
-    embedded_url:
-        label: Embedded video URL
-        type: text
-        span: auto

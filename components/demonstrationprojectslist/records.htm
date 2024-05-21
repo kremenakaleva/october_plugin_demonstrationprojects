@@ -1,36 +1,39 @@
 {% if records %}
 <div class="dp-records" id="recordsContainer">
-    {% for record in records %}
-    <div class="col-xs-12">
-        <div class="dp-card row">
-            <div class="col-md-3 col-xs-12 dp-card-img">
-                <a href="{{ 'dp'|page({ slug: record.slug }) }}">
-                    <img src="{{ record.cover_photo.thumb(300, 207, {'mode': 'crop'}) }}" class="card-img" alt="{{ record.title }}">
-                </a>
-            </div>
-            <div class="col-md-7 col-xs-12 dp-card-body">
-                <div class="card-title"><span class="dp-slug">{{ record.slug }}: </span> <a href="{{ 'dp'|page({ slug: record.slug }) }}">{{ record.title }}</a></div>
-                <div class="row dp-links">
-                    <div class="col-md-6 col-xs-12">
-                        <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more">Read more</a>
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                        {% if record.embedded_url %}
-                        <a href="javascript:void(0);" onclick="showVideoPopup('{{ record.embedded_url }}')" class="read-more watch-video">Watch video</a>
+    <div class="row">
+        {% for record in records %}
+            <div class="col-lg-3 col-md-6 col-xs-12 dp-card">
+                <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="dp-card-content">
+                    <div class="card-content">
+                        {% if record.cover_photo %}
+                        <div class="dp-image-container">
+                            <img src="{{ record.cover_photo.thumb(363, 266, {'mode': 'crop'}) }}" class="card-img" alt="{{ record.title }}">
+                        </div>
+                        {% else %}
+                        <div class="no-dp-image"></div>
                         {% endif %}
+                        <div class="col-xs-12 card-header">
+                            <div class="header-box">
+                                {% if record.slug %}
+                                {{ record.slug }} {% if record.country %}{{ record.country }}{% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 card-intro">
+                            {% if record.title %}
+                            {{ record.title }}
+                            {% endif %}
+                        </div>
                     </div>
+                </a>
+                <div class="row mb-2 card-links">
+                    <a href="{{ 'dp'|page({ slug: record.slug }) }}" class="read-more mr-2">Read more</a>
+                    {% if record.embedded_url %}
+                    <a href="javascript:void(0);" onclick="showVideoPopup('{{ record.embedded_url }}')" class="read-more watch-video">Watch video</a>
+                    {% endif %}
                 </div>
             </div>
-            <div class="col-md-2 col-xs-12 dp-card-country">
-                <div class="card-country">{{ record.country }}</div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
-
-<!-- If no records -->
 {% else %}
-    <h3>No records to display.</h3>
-{% endif %}
-</div>

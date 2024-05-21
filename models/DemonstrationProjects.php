@@ -29,7 +29,9 @@ class DemonstrationProjects extends Model
     /**
      * @var array rules for validation
      */
-    public $rules = [];
+    public $rules = [
+        // 'icon_settings' => 'json'
+    ];
 
     /**
      * @var array Attributes to be cast to native types
@@ -41,7 +43,7 @@ class DemonstrationProjects extends Model
     /**
      * @var array jsonable attribute names that are json encoded and decoded from the database
      */
-    protected $jsonable = [];
+    protected $jsonable = ['icon_settings'];
 
     /**
      * @var array appends attributes to the API representation of the model (ex. toArray())
@@ -92,7 +94,11 @@ class DemonstrationProjects extends Model
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [
-        'cover_photo' => 'System\Models\File'
+        'cover_photo' => 'System\Models\File',
+        'center_photo' => 'System\Models\File',
+        'right_photo' => 'System\Models\File',
+        'pdf_preview' => 'System\Models\File',
+        'pdf_document' => 'System\Models\File',
     ];
     public $attachMany = [];
 
@@ -114,6 +120,12 @@ class DemonstrationProjects extends Model
             'Spatial planning' => 'Spatial planning',
         ];
     }
+    
+    public function setIconSettingsAttribute($value)
+    {
+        $this->attributes['icon_settings'] = empty($value) ? json_encode([]) : json_encode($value);
+    }
+
 
     public function getScientificPartnersOptions()
     {

@@ -1,39 +1,96 @@
 {% if records %}
 <div class="container dp-detailed">
-    <!-- Header -->
-    <div class="col-xs-12 dp-head">
-        <h1><span class="dp-slug">{{records.slug}}:</span> {{records.title}}</h1>
+
+    <div class="header center-xs">
+        <h1 class="dp-slug">{%if records.slug %} {{records.slug}} {% endif %}</h1>
+        <h1 class="dp-title">{%if records.title %} {{records.title}} {% endif %}</h1>
     </div>
 
-   <!-- Cover and intro -->
-    <div class="row dp-cover-intro">
-        <div class="col-md-4 col-xs-12">
-            <img src="{{ records.cover_photo.thumb(300, 207, {'mode': 'crop'}) }}" class="card-img" alt="{{ records.title }}">
-        </div>
-        <div class="col-md-8 col-xs-12">
-            <div><span class="dp-title">Main objective: </span> {{ records.main_objective | raw }}</div>
-            <div><span class="dp-title">Expected outcome(s): </span> {{ records.expected_outcome | raw }}</div>
-        </div>
-    </div>
+    {% if records.icon_settings %}
+    <div class="row dp-icons {{ record.slug|lower }}">
+        {% if 'dp-grasslands' in records.icon_settings %}
+        <div class="dp-icon dp-grasslands" data-tooltip="Heath and grasslands"></div>
+        {% endif %}
+        {% if 'dp-marine' in records.icon_settings %}
+        <div class="dp-icon dp-marine" data-tooltip="Marine ecosystems"></div>
+        {% endif %}
+        {% if 'dp-urban' in records.icon_settings %}
+        <div class="dp-icon dp-urban" data-tooltip="Urban"></div>
+        {% endif %}
+        {% if 'dp-wetlands' in records.icon_settings %}
+        <div class="dp-icon dp-wetlands" data-tooltip="Wetlands"></div>
+        {% endif %}
+        {% if 'dp-agriculture' in records.icon_settings %}
+        <div class="dp-icon dp-agricultrure" data-tooltip="Agroecosystems"></div>
+        {% endif %}
+        {% if 'dp-forests' in records.icon_settings %}
+        <div class="dp-icon dp-forests" data-tooltip="Forests"></div>
+        {% endif %}
+        {% if 'dp-riverslakes' in records.icon_settings %}
+        <div class="dp-icon dp-riverslakes" data-tooltip="Rivers and lakes"></div>
+        {% endif %}
+    </div>    
+    {% endif %}
 
-    <!-- Main Content -->
-    <div class="row dp-content-row">
-        {% if records.embedded_url %}
-        <div class="col-md-4 col-xs-12 dp-video">
-            <iframe src="{{ records.embedded_url }}" title="YouTube video player" frameborder="0" allowfullscreen=""></iframe>
+    <div class="row mb-2">
+        {% if records.cover_photo %}
+        <div class="col-md-4 col-xs-12 dp-image">
+            <img src="{{ records.cover_photo.thumb(482, 285, {'mode': 'crop'}) }}" class="card-img" alt="{{ records.title }}">
         </div>
         {% endif %}
-        <div class="col-md-8 col-xs-12 dp-content">
-            <!-- CONTENT -->
-            <div class="row">{{records.content | raw}}</div>    
+        {% if records.embedded_url %}
+        <div class="col-md-4 col-xs-12 dp-image video">
+            <iframe src="{{ records.embedded_url }}" title="YouTube video player" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+        {% else %}
+        {% if records.center_photo %}
+        <div class="col-md-4 col-xs-12 dp-image">
+            <img src="{{ records.center_photo.thumb(482, 285, {'mode': 'crop'}) }}" class="card-img" alt="{{ records.title }}">
+        </div>
+        {% endif %}
+        {% endif %}
+        {% if records.right_photo %}
+        <div class="col-md-4 col-xs-12 dp-image">
+            <img src="{{ records.right_photo.thumb(482, 285, {'mode': 'crop'}) }}" class="card-img" alt="{{ records.title }}">
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row dp-objectives">
+        <div class="col-md-6 col-xs-12 main-objective">
+            <div class="objective-head">
+                <div class="obj-title">Main objective</div>
+            </div>
+            <div class="objective-text">
+                {% if records.main_objective %}  {{ records.main_objective | raw }} {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12 expected-outcome">
+            <div class="objective-head">
+                <div class="obj-title">Expected outcome</div>
+            </div>
+            <div class="objective-text">
+                {% if records.expected_outcome %}  {{ records.expected_outcome | raw }} {% endif %}
+            </div>
         </div>
     </div>
 
-    <!-- Partners -->
-    <div class="container dp-partners">
-        <div class="row align-items-center db-row">
+    <div class="row dp-content {{records.country|lower}} mb-3">
+        {% if records.pdf_document %}
+        <div class="col-md-2 col-xs-12 pdf-doc">
+            <a href="{{records.pdf_document.path}}" target="_blank" class="view-pdf"></a>
+            <a href="{{records.pdf_document.path}}" target="_blank">
+                {% if records.pdf_preview %}
+                <img src="{{ records.pdf_preview.thumb(233, 333, {'mode': 'crop'}) }}" class="card-img" alt="{{ records.title }}">
+                {% endif %}            
+            </a>
+        </div>
+        {% endif %}  
+        <div class="col-md-10 col-xs-12 dp-text">{% if records.expected_outcome %} {{records.content | raw}} {% endif %}</div>
+    </div>
 
-            <!-- Scientific Partners -->
+    <div class="dp-partners">
+        <div class="row align-items-center db-row">
             {% if records.scientific_partners %}
             <div class="col-md-4 col-xs-12 d-flex flex-md-row flex-column align-items-center">
                 <span class="dp-title">Scientific Partner:</span>
@@ -52,7 +109,6 @@
             </div>
             {% endif %}
 
-            <!-- Policy Partners -->
             {% if records.policy_partners %}
             <div class="col-md-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
                 <span class="dp-title">Policy Partner:</span>
@@ -71,13 +127,12 @@
             </div>
             {% endif %}
 
-            <!-- Business Partners -->
             {% if records.business_partners %}
             <div class="col-md-4 col-xs-12 d-flex align-items-center flex-md-row flex-column">
                 <span class="dp-title">Business Partner:</span>
                 {% if records.business_partners.count == 1 %}
                     {% set partner = records.business_partners.first() %}
-                    <a href="{{ partner.cover }}" target="_blank" class="ms-2">
+                    <a href="{{ partner.instituion_url }}" target="_blank" class="ms-2">
                         {% if partner.cover %}
                         <img src="{{ partner.cover.thumb(176, auto, {mode: 'crop'})}}" alt="Partner Cover" class="partner-img img-fluid">
                         {% else %}
@@ -89,11 +144,12 @@
                 {% endif %}
             </div>
             {% endif %}
-        </div>
+        </div>        
     </div>
 
+
 </div>
-<!-- If no records -->
+
 {% else %}
     <p>No record found with this slug.</p>
 {% endif %}

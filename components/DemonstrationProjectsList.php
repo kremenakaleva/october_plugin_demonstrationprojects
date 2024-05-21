@@ -3,19 +3,15 @@
 use Cms\Classes\ComponentBase;
 use Pensoft\DemonstrationProjects\Models\DemonstrationProjects as DemoModel;
 
-/**
- * DemonstrationProjectsList Component
- */
 class DemonstrationProjectsList extends ComponentBase
 {
     public $records;
+    public $categories;
+    public $clusters;
 
     public function onRun()
     {
-        $this->records = $this->filterRecords();
-        $this->page['records'] = $this->records;
-        $this->page['categories'] = $this->getCategoryOptions();
-        $this->page['clusters'] = $this->getClusterOptions();
+        $this->prepareVars();
     }
 
     public function componentDetails()
@@ -26,7 +22,23 @@ class DemonstrationProjectsList extends ComponentBase
         ];
     }
 
-    protected function getCategoryOptions()
+    protected function prepareVars()
+    {
+        $category = input('category', 'all');
+        $cluster = input('cluster', 'all');
+
+        $this->categories = $this->getCategoryOptions();
+        $this->clusters = $this->getClusterOptions();
+        $this->records = $this->filterRecords($category, $cluster);
+
+        $this->page['categories'] = $this->categories;
+        $this->page['clusters'] = $this->clusters;
+        $this->page['records'] = $this->records;
+        $this->page['category'] = $category;
+        $this->page['cluster'] = $cluster;
+    }
+
+    protected function getCategoryOptions() 
     {
         $demoModelInstance = new DemoModel();
         return $demoModelInstance->getCategoryOptions();
@@ -37,31 +49,17 @@ class DemonstrationProjectsList extends ComponentBase
         $demoModelInstance = new DemoModel();
         return $demoModelInstance->getClusterOptions();
     }
-    
-    public function onFilterRecords()
-    {
-        $this->page['records'] = $this->filterRecords();
-        return [
-            '#recordsContainer' => $this->renderPartial('@records', ['records' => $this->page['records']])
-        ];
-    }
-    
-    protected function filterRecords()
-    {
-        $category = \Input::get('category');
-        $cluster = \Input::get('cluster');
 
-        $this->page['category'] = $category;
-        $this->page['cluster'] = $cluster;
-
+    protected function filterRecords($categoryId = 'all', $clusterId = 'all')
+    {
         $query = DemoModel::query();
 
-        if($category){
-            $query->where('category', $category);
+        if ($categoryId !== 'all') {
+            $query->where('category', $categoryId);
         }
 
-        if($cluster){
-            $query->where('cluster', $cluster);
+        if ($clusterId !== 'all') {
+            $query->where('cluster', $clusterId);
         }
 
         return $query->orderBy('sort_order')->get();
