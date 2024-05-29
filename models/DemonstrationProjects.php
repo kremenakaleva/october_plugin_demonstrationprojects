@@ -121,12 +121,29 @@ class DemonstrationProjects extends Model
         ];
     }
     
+    public function getIconSettingsAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+    
     public function setIconSettingsAttribute($value)
     {
-        $this->attributes['icon_settings'] = empty($value) ? json_encode([]) : json_encode($value);
+        $this->attributes['icon_settings'] = json_encode($value);
     }
-
-
+    
+    public function getIconSettingsOptions()
+    {
+        return [
+            'dp-grasslands' => 'Grasslands',
+            'dp-marine' => 'Marine',
+            'dp-urban' => 'Urban',
+            'dp-wetlands' => 'Wetlands',
+            'dp-agriculture' => 'Agriculture',
+            'dp-forests' => 'Forests',
+            'dp-riverslakes' => 'Rivers & Lakes'
+        ];
+    }
+    
     public function getScientificPartnersOptions()
     {
         return \Pensoft\Partners\Models\Partners::pluck('instituion', 'id')->toArray();
@@ -176,6 +193,7 @@ class DemonstrationProjects extends Model
 
     public function beforeSave()
     {
+        
         $url = $this->embedded_url;
 
         // check if the URL is a YouTube link

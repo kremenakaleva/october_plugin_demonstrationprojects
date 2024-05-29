@@ -21,14 +21,7 @@ fields:
         label: Icon Settings
         span: full
         type: checkboxlist
-        options:
-            dp-grasslands: Grasslands
-            dp-marine: Marine
-            dp-urban: Urban
-            dp-wetlands: Wetlands
-            dp-agriculture: Agriculture
-            dp-forests: Forests
-            dp-riverslakes: Rivers & Lakes
+        options: getIconSettingsOptions
     cover_photo:
         label: Cover Photo (Left)
         type: fileupload
